@@ -1,8 +1,9 @@
-# Portable Knowledge Base
+# Portable Cross-Agent Second Brain
 
 A plain-markdown second brain that works the same in **Claude, Codex, and
-Cursor** — through just two instruction files, with a propose-then-approve
-process so nothing untrusted ever lands as fact.
+Cursor** — through just two instruction files. It routes to the note it needs
+instead of loading everything, so it **saves tokens**, and a propose-then-approve
+process means nothing untrusted ever lands as fact.
 
 No database. No vectors. No Obsidian. No lock-in. Clone it, fill in seven notes,
 point any of three agents at it, and your AI stops forgetting who you are between
@@ -16,17 +17,35 @@ flowchart LR
     ingest --> proposed["_proposed/<br/>drafts for review"]
     proposed --> approve(["human approves"])
     approve --> vault[("knowledge-base/<br/>7 trusted notes")]
-    vault --> claude["Claude<br/>reads CLAUDE.md"]
-    vault --> codex["Codex<br/>reads AGENTS.md"]
-    vault --> cursor["Cursor<br/>reads AGENTS.md"]
     vault -.-> curate{{"curate skill<br/>weekly health check"}}
     curate -.-> proposed
+    claude["Claude · CLAUDE.md"] --> router
+    codex["Codex · AGENTS.md"] --> router
+    cursor["Cursor · AGENTS.md"] --> router
+    router{{"selective routing<br/>opens only the note needed — saves tokens"}} --> vault
 ```
 
 New material is always **proposed**, never written straight to memory; a human
-approves before anything in `knowledge-base/` becomes trusted. The same vault is
-read by all three agents through two files kept in parity — Claude reads
-`CLAUDE.md`; Codex and Cursor both read `AGENTS.md` (Cursor reads it natively).
+approves before anything in `knowledge-base/` becomes trusted. On the read side,
+each of the three agents **routes to the one note it needs** instead of loading
+the whole vault — that's the token-saving retrieval layer. The same vault is read
+by all three agents through two files kept in parity: Claude reads `CLAUDE.md`;
+Codex and Cursor both read `AGENTS.md` (Cursor reads it natively).
+
+## Why it's valuable
+
+Done-for-you "second brain" builds are advertised around **$5,000**. This is the
+same idea, as an open, adaptable starter kit — but the real payoff shows up at
+scale.
+
+Because every agent reads one shared context and routes to only the note it
+needs, teams stop re-pasting the same background into every session, and the
+model stops re-reading context it doesn't need. At enterprise volume that token
+economy compounds: lower usage bills that can recover the cost of building it in
+a matter of months. The mechanism is simple — **pay for context once, route to
+it precisely, reuse it everywhere** — and the savings grow with every seat and
+every session. (Actual payback depends on usage; the lever is fewer and smaller
+context loads.)
 
 ## Status
 
@@ -42,10 +61,13 @@ plugins, a tool to learn) or locked to one vendor. This is the opposite:
 - **Uncomplicated.** Seven markdown files and two instruction files. You can read
   the whole thing in ten minutes. The knowledge is yours, in a format any AI can
   read, forever.
-- **Interchangeable across agents.** The differentiator. Claude reads
-  `CLAUDE.md`; Codex and Cursor read `AGENTS.md` (Cursor reads it natively as of
-  2026). Two files in parity = one vault that behaves consistently in all three.
-  Switch tools, or use all three on the same brain, with zero migration.
+- **Interchangeable across agents.** Claude reads `CLAUDE.md`; Codex and Cursor
+  read `AGENTS.md` (Cursor reads it natively as of 2026). Two files in parity =
+  one vault that behaves consistently in all three. Switch tools, or use all
+  three on the same brain, with zero migration.
+- **Token-efficient by design.** Selective routing means the agent reads a small
+  map and opens only the relevant note — retrieval without a vector database.
+  It's what keeps the no-database approach cheap as the vault grows.
 - **Trustworthy.** New material flows `_inbox/` → ingest → `_proposed/` → you
   approve. AI only ever proposes; a human approves before anything becomes
   memory. That invariant is what makes it safe to rely on.
@@ -79,10 +101,21 @@ Each note carries frontmatter with a `status` (extracted / inferred / verified /
 deprecated) and `sensitivity` (public / internal / confidential / restricted), so
 a guess is never mistaken for a fact.
 
+## How the routing works (the token-saver)
+
+The instruction files carry a small routing map — "for this kind of question,
+open this note" — and the rule *don't load the whole vault by default*. The agent
+reads the map, opens only what's relevant, and skips the rest. With seven notes
+the map is tiny; the point is that it keeps working as the vault grows to seventy.
+That's retrieval-by-routing instead of retrieval-by-embedding: no vector store,
+no index server, just a table and a discipline — and a smaller context bill every
+session.
+
 ## How to evaluate this in 5 minutes
 
 1. Read `CLAUDE.md` and `AGENTS.md` side by side — note they're the same rules,
-   phrased per client. That's the portability claim, made concrete.
+   phrased per client, including the routing map. That's the portability and the
+   token-saving, made concrete.
 2. Skim `knowledge-base/snapshot.md` to see the note shape and the example.
 3. Read `skills/ingest/SKILL.md` to see how capture stays propose-then-approve.
 4. Then the real test: open the folder in Claude (or Codex, or Cursor), fill the

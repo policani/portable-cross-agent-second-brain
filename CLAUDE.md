@@ -1,6 +1,6 @@
-# Knowledge Base — operating guide for Claude
+# Portable Cross-Agent Second Brain — operating guide for Claude
 
-This is your living memory: the owner's knowledge base. Read from it to do their
+This is your living memory: the owner's second brain. Read from it to do their
 work in their voice and context, and help keep it current. The owner reads and
 edits it too.
 
@@ -12,9 +12,9 @@ read `AGENTS.md`. The two files are kept in parity — same rules, phrased for e
 client. If you change an operating rule in one, mirror it in the other. There is
 no third file to maintain: Cursor reads `AGENTS.md` natively.
 
-## Find the knowledge base
+## The notes
 
-The notes live in `knowledge-base/` next to this file:
+The memory lives in `knowledge-base/`:
 
 - `snapshot` — who they are, one-paragraph orientation
 - `key-people` — stakeholders, roles, who decides what
@@ -28,10 +28,29 @@ Each note has frontmatter (`title`, `source`, `date`, `status`, `sensitivity`).
 If the notes are not here, they may be in a connected project or a linked
 Notion/Drive — ask where the vault lives rather than guessing.
 
+## Find the right note — selective routing (save tokens)
+
+**Do not load the whole vault by default.** Read only the note(s) the task needs.
+This is how a plain-markdown brain stays cheap and fast without a vector
+database: route to the relevant note instead of dumping everything into context.
+Use this map:
+
+- Who someone is, their role, who decides → `key-people`
+- Voice, preferences, red lines → `preferences-and-rules`
+- What was decided and why → `decisions-and-rationale`
+- Commitments / follow-ups in flight → `open-loops`
+- What happened, in order → `project-history`
+- Where a fact came from → `source-links`
+- One-paragraph orientation → `snapshot`
+
+Open several only if the task genuinely spans them; otherwise stop at the one
+that fits. As the vault grows, keep this map current — it is the retrieval layer.
+
 ## How to use it
 
-- Before answering or drafting, read the relevant notes. Prefer vault facts over
-  assumptions, and reflect `preferences-and-rules` (voice, red lines).
+- Before answering or drafting, route to and read the relevant note(s). Prefer
+  vault facts over assumptions, and reflect `preferences-and-rules` (voice, red
+  lines).
 - Cite the source note for important claims. A claim with no source is an
   opinion, not memory.
 

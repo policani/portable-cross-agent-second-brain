@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portable Knowledge Base</title>
+<title>Portable Cross-Agent Second Brain</title>
 <style>
   :root { --ink:#1a1a1a; --muted:#6b7280; --line:#e5e7eb; --accent:#2563eb; --bg:#ffffff; --chip:#f3f4f6; }
   * { box-sizing: border-box; }
   body { margin:0; font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:var(--bg); }
   .wrap { max-width:820px; margin:0 auto; padding:48px 24px 80px; }
-  h1 { font-size:32px; margin:0 0 8px; letter-spacing:-0.02em; }
+  h1 { font-size:30px; margin:0 0 8px; letter-spacing:-0.02em; }
   .tag { color:var(--muted); margin:0 0 28px; font-size:17px; }
-  .parity { background:var(--chip); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin:0 0 36px; }
+  .parity { background:var(--chip); border:1px solid var(--line); border-radius:12px; padding:18px 20px; margin:0 0 18px; }
   .parity b { color:var(--accent); }
   h2 { font-size:14px; text-transform:uppercase; letter-spacing:0.08em; color:var(--muted); margin:40px 0 14px; }
   .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
@@ -27,14 +27,18 @@
 </head>
 <body>
 <div class="wrap">
-  <h1>Portable Knowledge Base</h1>
-  <p class="tag">A plain-markdown second brain that works the same in Claude, Codex, and Cursor.</p>
+  <h1>Portable Cross-Agent Second Brain</h1>
+  <p class="tag">A plain-markdown second brain that works the same in Claude, Codex, and Cursor — and routes to the note it needs, so it saves tokens.</p>
 
   <div class="parity">
     One vault, three agents, <b>two files</b>. Claude reads <code>CLAUDE.md</code>;
     Codex and Cursor read <code>AGENTS.md</code> (Cursor natively). Same rules,
     phrased per client — switch tools with zero migration.
   </div>
+
+  <p class="flow" style="margin:0 0 8px">
+    <b style="color:var(--ink)">Saves tokens:</b>&nbsp; the agent reads a routing map and opens <code>only the note it needs</code> — retrieval without a vector database.
+  </p>
 
   <h2>The 7 notes</h2>
   <div class="grid">
@@ -56,7 +60,7 @@
     AI only ever proposes. A human approves before anything becomes trusted memory.
   </p>
 
-  <div class="foot">Portable Knowledge Base · plain markdown, no dependencies · by Marco Policani</div>
+  <div class="foot">Portable Cross-Agent Second Brain · plain markdown, no dependencies · by Marco Policani</div>
 </div>
 </body>
 </html>

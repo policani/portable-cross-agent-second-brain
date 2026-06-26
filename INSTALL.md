@@ -7,8 +7,8 @@ connecting sources.
 ## What's in the box
 
 ```
-portable-knowledge-base/
-  CLAUDE.md            # Claude entry point (rules + where the vault is)
+portable-cross-agent-second-brain/
+  CLAUDE.md            # Claude entry point (rules, routing map, where the vault is)
   AGENTS.md            # Codex + Cursor entry point (same rules, in parity)
   knowledge-base/      # the 7 notes — your actual memory
   _inbox/              # drop raw material here
