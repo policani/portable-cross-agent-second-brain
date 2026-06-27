@@ -9,6 +9,12 @@ No database. No vectors. No Obsidian. No lock-in. Clone it, fill in seven notes,
 point any of three agents at it, and your AI stops forgetting who you are between
 sessions.
 
+> **This is the Team edition** — built for shared use, with a propose-then-approve
+> gate so memory stays trustworthy when more than one person (and their agents)
+> write to it. Working solo? The
+> [Personal edition](https://github.com/policani/portable-cross-agent-second-brain-personal)
+> drops the gate: the AI drafts straight into your notes.
+
 ## How it works
 
 ```mermaid
