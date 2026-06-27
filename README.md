@@ -1,4 +1,4 @@
-# Portable Cross-Agent Second Brain
+# Portable Cross-Agent Second Brain for Teams
 
 A plain-markdown second brain that works the same in **Claude, Codex, and
 Cursor** — through just two instruction files. It routes to the note it needs
