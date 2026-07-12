@@ -161,12 +161,16 @@
   .insp .open:hover{border-color:var(--accent);text-decoration:none}
   .insp .x{float:right;color:var(--dim);cursor:pointer;font-size:15px;line-height:1}
   .chip{font-size:10px;padding:2px 8px;border-radius:12px;border:1px solid var(--line2)}
+  .refreshbtn{background:var(--panel);border:1px solid var(--line2);color:var(--dim);border-radius:8px;padding:6px 11px;font-size:12px;white-space:nowrap;flex:none}
+  .refreshbtn:hover{border-color:var(--accent);color:var(--text)}
+  .refreshbtn:disabled{cursor:wait;opacity:.72}
 </style>
 </head>
 <body>
 <header>
   <div class="brand"><b><span class="mark">◆</span> VAULT&nbsp;MAP</b><span id="rootname">console</span></div>
   <div class="kpis" id="kpis"></div>
+  <button class="refreshbtn" id="refresh" type="button">⟳ Refresh</button>
   <div class="gen" id="gen"></div>
 </header>
 <main>
@@ -194,7 +198,11 @@
   <aside class="inspector"><div class="insp-empty" id="insp">Select a file or type to inspect.</div></aside>
 </main>
 
-<script src="brain-index.js"></script>
+<script>
+/* Read the newly generated index after a refresh, including when this page is
+   opened directly from disk and the browser would otherwise reuse a cached JS file. */
+document.write('<script src="brain-index.js?t='+Date.now()+'"><\/script>');
+</script>
 <script>
 "use strict";
 /* ============================================================= *
@@ -215,7 +223,7 @@ const SAMPLE = {
     {path:"products/x/skills/ingest/SKILL.md",dir:"products/x/skills/ingest",sections:1,summary:"Skill",bytes:3400,indexed:true,links:[]}
   ],
   sections:[{file:"AGENTS.md",heading:"Overview",line:1,terms:{}}],
-  arms:{skills:[],agents:[{name:"architecture",tool:"cowork",description:"Bucket: Build",path:"x.md"}],routines:[{name:"wiki-doctor --fix",schedule:"after edits"}],applications:[{name:"Codex CLI",kind:"agent"}],agent_gaps:[]}
+  arms:{skills:[],agents:[{name:"architecture",tool:"cowork",description:"Bucket: Build",path:"x.md"}],routines:[{name:"brain.py --index",schedule:"after edits"}],applications:[{name:"Codex CLI",kind:"agent"}],agent_gaps:[]}
 };
 const IX = (window.BRAIN_INDEX && window.BRAIN_INDEX.files && window.BRAIN_INDEX.files.length) ? window.BRAIN_INDEX : SAMPLE;
 const DEMO = IX===SAMPLE;
@@ -346,7 +354,7 @@ function scoped(){ return files.filter(passBase); }
 function renderHeader(){
   $("#rootname").textContent=(DEMO?"demo · ":"")+IX.root_name+" vault";
   const totB=files.reduce((s,f)=>s+(f.bytes||0),0);
-  $("#gen").innerHTML="indexed "+esc((IX.generated||"").replace("T"," ").slice(0,16))+
+  $("#gen").innerHTML="indexed "+esc((IX.generated||"").replace("T"," ").slice(0,19))+
     "<br>"+files.length+" files · "+kb(totB)+(DEMO?" · <b style='color:var(--warn)'>sample</b>":"");
   const groups=typeGroups(files);
   const wrap=$("#kpis"); wrap.innerHTML="";
@@ -733,6 +741,29 @@ let rt; addEventListener("resize",()=>{ clearTimeout(rt); rt=setTimeout(()=>{ if
 /* boot */
 buildTree();
 renderAll();
+(function(){
+  const btn=$("#refresh");
+  const served=location.protocol==="http:"||location.protocol==="https:";
+  btn.title=served
+    ? "Rebuild the index and reload this console."
+    : "Open Open-Second-Brain-Console.bat to refresh this page automatically.";
+  btn.onclick=async()=>{
+    if(!served){
+      alert("For a live rebuild and same-page reload, open Open-Second-Brain-Console.bat.\n\nYou can also run: python brain.py --index");
+      return;
+    }
+    const original=btn.textContent; btn.textContent="⟳ Reindexing…"; btn.disabled=true;
+    try{
+      const response=await fetch("/reindex",{method:"POST"});
+      const result=await response.json().catch(()=>({}));
+      if(!response.ok||result.ok===false) throw new Error(result.error||("exit "+result.returncode));
+      location.reload();
+    }catch(error){
+      btn.disabled=false; btn.textContent=original;
+      alert("Reindex failed: "+error.message+"\n\nYou can also run: python brain.py --index");
+    }
+  };
+})();
 </script>
 </body>
 </html>
