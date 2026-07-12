@@ -16,6 +16,43 @@ straight from the folder, no server, no build step. Agent squares show every
 capability in both Cowork and Codex form; a role missing its counterpart is
 flagged as a parity gap. Nothing reaches trusted memory without approval.*
 
+## New: a web-based Management Console
+
+Your second brain now has a **console** — open `index.html` from the folder and
+manage the whole vault in the browser. No server, no build step, no account. It
+reads the same generated index as the map, so it works the moment you have notes.
+
+![Constellation view: the whole vault as a living map that builds in real time on load — files as dots clustered by folder inside rings of skills, agents, routines, and applications](assets/console-constellation.png)
+
+*Constellation — the signature overview. It builds progressively on load, so you
+watch the vault take shape instead of staring at a blank screen.*
+
+![Types view: every file classified by role — AI logic, reference, output, template, office, media, software, backup — with counts and sizes per type](assets/console-types.png)
+
+*Types — every file classified by what it **is**: AI logic, reference, output,
+template, office docs, media, software, backups. Counts and sizes at a glance.*
+
+![Sizes view: a treemap where each file is sized by bytes and colored by role, so the biggest files and heaviest folders pop immediately](assets/console-sizes.png)
+
+*Sizes — a treemap sized by bytes and colored by role. The heavy files and
+folders pop, so cleanup targets are obvious.*
+
+![Table view: a sortable, Excel-style filterable list of every file with role, format, size, and reference columns, and a detail inspector open on the right](assets/console-table.png)
+
+*Table — a sortable, Excel-style filterable list. Filter to just AI-logic files
+or just outputs in two clicks; select any file for a full detail inspector.*
+
+The console is one page with several lenses over the same vault:
+
+- **Constellation** — the interactive map, now building in real time on load.
+- **Types** — files grouped and colored by role or raw format, with counts and sizes.
+- **Sizes** — a treemap that makes large files and folders obvious at a glance.
+- **Table** — a sortable, **Excel-style filterable** list; filter to just AI-logic
+  files, or just outputs, in two clicks.
+
+Search, folder tree, per-type filters, and a detail inspector are always at hand.
+Everything runs locally against your own notes — nothing is uploaded.
+
 > **This is the Team edition** — built for shared use, with a propose-then-approve
 > gate so memory stays trustworthy when more than one person (and their agents)
 > write to it. Working solo? The
@@ -49,9 +86,9 @@ The routing is enforced by code, not just convention. The bundled **`brain.py`**
 (one file, Python stdlib, zero dependencies) indexes every heading-level section
 of the vault and answers "where is X?" deterministically — keyword scoring,
 `path:line` targets, best section printed straight to the terminal — before a
-single model token is spent. The same generated index feeds **`vault-map.html`**,
-an interactive map of the vault (departments, files, skills, connected apps and
-routines) that opens directly from the filesystem: no server, no build step.
+single model token is spent. The same generated index feeds the **web Management
+Console** (`index.html`) and the standalone **Constellation map** (`vault-map.html`) —
+both open directly from the filesystem: no server, no build step.
 
 ## Why it's valuable
 
@@ -103,8 +140,8 @@ _inbox/  _proposed/     capture staging and the approval queue
 skills/ingest/          capture new material into proposed notes
 skills/curate/          weekly health check
 brain.py                deterministic retrieval: index + query, no dependencies
-vault-map.html          interactive vault map, opens from the filesystem
-index.html              open in a browser to read the vault
+index.html              web Management Console — Constellation, Types, Sizes, Table
+vault-map.html          the Constellation map on its own, opens from the filesystem
 INSTALL.md              setup for Claude, Codex, and Cursor
 ```
 
