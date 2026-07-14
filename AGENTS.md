@@ -1,4 +1,4 @@
-# Portable Cross-Agent Second Brain — operating guide for Codex and Cursor
+# KnoVault — Team operating guide for Codex and Cursor
 
 This is your living memory: the owner's second brain. Read from it to do their
 work in their voice and context, and help keep it current. The owner reads and
