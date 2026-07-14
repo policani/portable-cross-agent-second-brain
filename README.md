@@ -9,7 +9,7 @@ No database. No vectors. No Obsidian. No lock-in. Clone it, fill in seven notes,
 point any of three agents at it, and your AI stops forgetting who you are between
 sessions.
 
-![Vault map, team edition: the shared vault, projects, clients, and ops as dot clusters inside rings of skills, agents, routines, and applications — with agent parity gaps flagged and the propose-approve gate protecting trusted memory](assets/vault-map-team.png)
+![KnoVault constellation, team edition: the shared vault, projects, clients, and operations as dot clusters inside rings of skills, agents, routines, and applications — with agent parity gaps flagged and the propose-approve gate protecting trusted memory](assets/vault-map-team.svg)
 
 *The bundled `vault-map.html` renders the shared vault like this — open it
 straight from the folder, no server, no build step. Agent squares show every
@@ -24,25 +24,9 @@ It starts a local-only helper, so the **Refresh** button can rebuild the index
 and reload the same page with an updated timestamp. No account is required and
 your files never leave your machine.
 
-![Constellation view: the whole vault as a living map that builds in real time on load — files as dots clustered by folder inside rings of skills, agents, routines, and applications](assets/console-constellation.png)
-
-*Constellation — the signature overview. It builds progressively on load, so you
-watch the vault take shape instead of staring at a blank screen.*
-
-![Types view: every file classified by role — AI logic, reference, output, template, office, media, software, backup — with counts and sizes per type](assets/console-types.png)
-
-*Types — every file classified by what it **is**: AI logic, reference, output,
-template, office docs, media, software, backups. Counts and sizes at a glance.*
-
-![Sizes view: a treemap where each file is sized by bytes and colored by role, so the biggest files and heaviest folders pop immediately](assets/console-sizes.png)
-
-*Sizes — a treemap sized by bytes and colored by role. The heavy files and
-folders pop, so cleanup targets are obvious.*
-
-![Table view: a sortable, Excel-style filterable list of every file with role, format, size, and reference columns, and a detail inspector open on the right](assets/console-table.png)
-
-*Table — a sortable, Excel-style filterable list. Filter to just AI-logic files
-or just outputs in two clicks; select any file for a full detail inspector.*
+The console renders the vault you choose to index, rather than shipping a
+real-person example. The public map above is an anonymized schematic of the
+same structure.
 
 The console is one page with several lenses over the same vault:
 
