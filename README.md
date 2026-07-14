@@ -19,7 +19,7 @@ flagged as a parity gap. Nothing reaches trusted memory without approval.*
 ## New: a web-based Management Console
 
 Your second brain now has a **console** — open
-**`Open-Second-Brain-Console.bat`** to manage the whole vault in the browser.
+**`Open-KnoVault-Console.bat`** to manage the whole vault in the browser.
 It starts a local-only helper, so the **Refresh** button can rebuild the index
 and reload the same page with an updated timestamp. No account is required and
 your files never leave your machine.
@@ -76,7 +76,7 @@ of the vault and answers "where is X?" deterministically — keyword scoring,
 `path:line` targets, best section printed straight to the terminal — before a
 single model token is spent. The same generated index feeds the **web Management
 Console** (`index.html`) and the standalone **Constellation map** (`vault-map.html`).
-The map opens directly from the filesystem; use `Open-Second-Brain-Console.bat`
+The map opens directly from the filesystem; use `Open-KnoVault-Console.bat`
 when you want Refresh to rebuild and reload the console in the same browser page.
 
 ## Why it's valuable
@@ -132,7 +132,7 @@ brain.py                deterministic retrieval: index + query, no dependencies
 index.html              web Management Console — Constellation, Types, Sizes, Table
 vault-map.html          the Constellation map on its own, opens from the filesystem
 serve-second-brain.py   localhost-only helper for live console refreshes
-Open-Second-Brain-Console.bat  one-click launcher for the live console
+Open-KnoVault-Console.bat     one-click launcher for the live console
 INSTALL.md              setup for Claude, Codex, and Cursor
 ```
 
