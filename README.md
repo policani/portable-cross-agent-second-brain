@@ -48,6 +48,13 @@ The console is one page with several lenses over the same vault:
 - **Sizes** — a treemap that makes large files and folders obvious at a glance.
 - **Table** — a sortable, **Excel-style filterable** list; filter to just AI-logic
   files, or just outputs, in two clicks.
+- **Inventory scope** — switch plainly between Memory & work files, All files,
+  and Cleanup candidates so a large physical inventory never makes the map
+  unreadable by default.
+- **Cleanup** — a read-only storage-triage report that flags known runtime
+  caches, rebuildable dependencies, build output, large files, archives, and
+  exact duplicates with its evidence. It never deletes files or claims that
+  candidate bytes are reclaimable space.
 - **Refresh** — rebuilds the local index and reloads the current console page.
 
 Search, folder tree, per-type filters, and a detail inspector are always at hand.
